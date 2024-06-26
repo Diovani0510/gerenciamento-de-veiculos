@@ -1,0 +1,161 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Diovani
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: marca
+      changes:
+        - createTable:
+            tableName: marca
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: nome
+                  type: varchar(250)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: url_imagem
+                  type: varchar(500)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: 2
+      author: Diovani
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: modelo
+      changes:
+        - createTable:
+            tableName: modelo
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: marca_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: nome
+                  type: varchar(250)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valor_fipe
+                  type: NUMERIC(10,2)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 3
+      author: Diovani
+      preConditions:
+        - onFail: MARK_RAN
+          tableExists:
+            tableName: modelo
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: marca_id
+            baseTableName: modelo
+            baseTableSchemaName: public
+            constraintName: fk_modelo_marca
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: marca
+            referencedTableSchemaName: public
+            validate: true
+  - changeSet:
+      id: 4
+      author: Diovani
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: carro
+      changes:
+        - createTable:
+            tableName: carro
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: timestamp_cadastro
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modelo_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ano
+                  type: NUMERIC
+                  constraints:
+                    nullable: false
+              - column:
+                  name: combustivel
+                  type: varchar(250)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: numero_portas
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cor
+                  type: varchar(250)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: url_imagem
+                  type: varchar(500)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: 5
+      author: Diovani
+      preConditions:
+        - onFail: MARK_RAN
+          tableExists:
+            tableName: carro
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: modelo_id
+            baseTableName: carro
+            baseTableSchemaName: public
+            constraintName: fk_carro_modelo
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: modelo
+            referencedTableSchemaName: public
+            validate: true

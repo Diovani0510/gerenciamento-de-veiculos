@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: gerenciamento-de-veiculos
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+---
+###############################################################
+#####            Configurações ambiente local            ######
+###############################################################
+spring:
+  config:
+    activate:
+      on-profile: develop
+  datasource:
+      url: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      password: postgres
+server:
+  port: 8080
+
+---
+###############################################################
+#####            Configurações ambiente cloud            ######
+###############################################################
+spring:
+  config:
+    activate:
+      on-profile: cloud
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+server:
+  port: ${SERVER_PORT}
