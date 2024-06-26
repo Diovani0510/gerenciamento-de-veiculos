@@ -6,7 +6,7 @@ import com.diovani.gerenciamento_de_veiculos.model.Modelo;
 import com.diovani.gerenciamento_de_veiculos.service.modelo.ModeloService;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Service
 public class CarroBuilderService {
@@ -21,7 +21,7 @@ public class CarroBuilderService {
         Modelo modelo = this.modeloService.buscarPorId(dto.modeloId());
 
         return Carro.builder()
-                .timestampCadastro(new Timestamp(System.currentTimeMillis()))
+                .dataCadastro(LocalDateTime.now())
                 .modelo(modelo)
                 .ano(dto.ano())
                 .combustivel(dto.combustivel())

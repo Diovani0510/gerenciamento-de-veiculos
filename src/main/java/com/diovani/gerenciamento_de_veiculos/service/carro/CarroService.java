@@ -40,11 +40,11 @@ public class CarroService {
             carro.setCombustivel(dto.combustivel());
         }
 
-        if (dto.cor() != null) {
+        if (!dto.urlImagem().isBlank()) {
             carro.setCor(dto.cor());
         }
 
-        if (dto.urlImagem() != null) {
+        if (!dto.urlImagem().isBlank()) {
             carro.setUrlImagem(dto.urlImagem());
         }
 

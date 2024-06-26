@@ -3,7 +3,6 @@ package com.diovani.gerenciamento_de_veiculos.service.modelo;
 import com.diovani.gerenciamento_de_veiculos.dto.modelo.PutModeloDTO;
 import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNãoEncontradaException;
 import com.diovani.gerenciamento_de_veiculos.exception.InternalServerErrorException;
-import com.diovani.gerenciamento_de_veiculos.model.Marca;
 import com.diovani.gerenciamento_de_veiculos.model.Modelo;
 import com.diovani.gerenciamento_de_veiculos.repository.ModeloRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +40,7 @@ public class ModeloService {
             modelo.setValorFipe(dto.valorFipe());
         }
 
-        if (dto.nome() != null) {
+        if (!dto.nome().isBlank()) {
             modelo.setNome(dto.nome());
         }
 

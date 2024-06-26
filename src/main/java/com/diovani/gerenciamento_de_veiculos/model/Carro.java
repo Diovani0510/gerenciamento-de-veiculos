@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -22,7 +22,7 @@ public class Carro {
     private Long id;
 
     @Column(nullable = false)
-    private Timestamp timestampCadastro;
+    private LocalDateTime dataCadastro;
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "MODELO_ID", referencedColumnName = "ID", nullable = false)
@@ -41,8 +41,8 @@ public class Carro {
 
     private String urlImagem;
 
-    public Carro(Timestamp timestampCadastro, Modelo modelo, Integer ano, CombustivelEnum combustivel, Integer numeroPortas, String cor, String urlImagem) {
-        this.timestampCadastro = timestampCadastro;
+    public Carro(LocalDateTime dataCadastro, Modelo modelo, Integer ano, CombustivelEnum combustivel, Integer numeroPortas, String cor, String urlImagem) {
+        this.dataCadastro = dataCadastro;
         this.modelo = modelo;
         this.ano = ano;
         this.combustivel = combustivel;

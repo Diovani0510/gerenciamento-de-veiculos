@@ -4,7 +4,7 @@ import com.diovani.gerenciamento_de_veiculos.controller.documentacao.IMarcaContr
 import com.diovani.gerenciamento_de_veiculos.dto.marca.PostMarcaDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.marca.PutMarcaDTO;
 import com.diovani.gerenciamento_de_veiculos.model.Marca;
-import com.diovani.gerenciamento_de_veiculos.service.marca.MarcaBoulderService;
+import com.diovani.gerenciamento_de_veiculos.service.marca.MarcaBuilderService;
 import com.diovani.gerenciamento_de_veiculos.service.marca.MarcaService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/marcas")
 public class MarcaController implements IMarcaController {
 
-    private final MarcaBoulderService builderService;
+    private final MarcaBuilderService builderService;
     private final MarcaService service;
 
-    public MarcaController(MarcaBoulderService builderService, MarcaService service) {
+    public MarcaController(MarcaBuilderService builderService, MarcaService service) {
         this.builderService = builderService;
         this.service = service;
     }

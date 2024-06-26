@@ -1,6 +1,6 @@
 package com.diovani.gerenciamento_de_veiculos.dto.marca;
 
-import jakarta.validation.constraints.NotBlank;
-
-public record PutMarcaDTO(@NotBlank(message = "Nome da marca é obrigatório.") String nome) {
+public record PutMarcaDTO(
+        String nome,
+        String urlImagem) {
 }

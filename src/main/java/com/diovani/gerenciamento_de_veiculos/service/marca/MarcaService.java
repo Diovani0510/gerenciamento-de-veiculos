@@ -36,7 +36,14 @@ public class MarcaService {
     public Marca editar(Long id, PutMarcaDTO dto) {
         Marca marca = this.buscarPorId(id);
 
-        marca.setNome(dto.nome());
+        if (!dto.nome().isBlank()) {
+            marca.setNome(dto.nome());
+        }
+
+        if (!dto.urlImagem().isBlank()) {
+            marca.setUrlImagem(dto.urlImagem());
+        }
+
         return this.salvar(marca);
     }
 
