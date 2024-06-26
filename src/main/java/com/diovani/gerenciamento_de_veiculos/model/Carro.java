@@ -34,14 +34,14 @@ public class Carro {
     @Enumerated(EnumType.STRING)
     private CombustivelEnum combustivel;
 
-    private String numeroPortas;
+    private Integer numeroPortas;
 
     @Column(nullable = false)
     private String cor;
 
     private String urlImagem;
 
-    public Carro(Timestamp timestampCadastro, Modelo modelo, Integer ano, CombustivelEnum combustivel, String numeroPortas, String cor, String urlImagem) {
+    public Carro(Timestamp timestampCadastro, Modelo modelo, Integer ano, CombustivelEnum combustivel, Integer numeroPortas, String cor, String urlImagem) {
         this.timestampCadastro = timestampCadastro;
         this.modelo = modelo;
         this.ano = ano;
