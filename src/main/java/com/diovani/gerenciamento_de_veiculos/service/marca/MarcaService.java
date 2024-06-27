@@ -1,5 +1,6 @@
 package com.diovani.gerenciamento_de_veiculos.service.marca;
 
+import com.diovani.gerenciamento_de_veiculos.dto.ResumoDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.marca.PutMarcaDTO;
 import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNaoEncontradaException;
 import com.diovani.gerenciamento_de_veiculos.exception.InternalServerErrorException;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -50,6 +53,16 @@ public class MarcaService {
     public Page<Marca> listar(Integer numeroPagina, Integer quantidadeItens) {
         try {
             return this.repository.findAll(PageRequest.of(numeroPagina, quantidadeItens));
+        } catch (Exception e) {
+            log.error("Falha ao buscar a lista de marcas.", e);
+            throw new InternalServerErrorException(e.getMessage());
+        }
+    }
+
+    public List<ResumoDTO> listarResumo() {
+        try {
+            List<Marca> marcasResumidas = this.repository.findAll();
+            return marcasResumidas.stream().map(marca -> new ResumoDTO(marca.getId(), marca.getNome())).toList();
         } catch (Exception e) {
             log.error("Falha ao buscar a lista de marcas.", e);
             throw new InternalServerErrorException(e.getMessage());

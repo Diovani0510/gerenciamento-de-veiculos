@@ -1,6 +1,7 @@
 package com.diovani.gerenciamento_de_veiculos.controller.documentacao;
 
 
+import com.diovani.gerenciamento_de_veiculos.dto.ResumoDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.marca.PostMarcaDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.marca.PutMarcaDTO;
 import com.diovani.gerenciamento_de_veiculos.model.Marca;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Tag(name = "Controller de Marcas", description = "Gerenciamento de Marcas")
 public interface IMarcaController {
@@ -27,6 +30,9 @@ public interface IMarcaController {
     @Operation(summary = "Buscar lista de Marcas", description = "Busca uma lista paginada de Marcas.")
     ResponseEntity<Page<Marca>> listar(@RequestParam(defaultValue = "0") final Integer numeroPagina,
                                        @RequestParam(defaultValue = "5") final Integer quantidadeItens);
+
+    @Operation(summary = "Buscar lista resumida de Marcas", description = "Busca uma lista resumida de Marcas.")
+    ResponseEntity<List<ResumoDTO>>  listarResumo();
 
     @Operation(summary = "Deletar Marca", description = "Deleta uma Marca por seu Id.")
     ResponseEntity<Long> deletarPorId(@PathVariable Long id);

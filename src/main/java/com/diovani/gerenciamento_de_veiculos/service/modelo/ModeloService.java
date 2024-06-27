@@ -1,5 +1,6 @@
 package com.diovani.gerenciamento_de_veiculos.service.modelo;
 
+import com.diovani.gerenciamento_de_veiculos.dto.ResumoDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.modelo.PutModeloDTO;
 import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNaoEncontradaException;
 import com.diovani.gerenciamento_de_veiculos.exception.InternalServerErrorException;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -59,6 +62,16 @@ public class ModeloService {
     public Page<Modelo> listarPorMarcaId(Long marcaId, Integer numeroPagina, Integer quantidadeItens) {
         try {
             return this.repository.findAllByMarcaId(marcaId, PageRequest.of(numeroPagina, quantidadeItens));
+        } catch (Exception e) {
+            log.error("Falha ao buscar a lista de modelos.", e);
+            throw new InternalServerErrorException(e.getMessage());
+        }
+    }
+
+    public List<ResumoDTO> listarResumoPorMarcaId(Long marcaId) {
+        try {
+            List<Modelo> modelosResumidos = this.repository.findAllByMarcaId(marcaId);
+            return modelosResumidos.stream().map(modelo -> new ResumoDTO(modelo.getId(), modelo.getNome())).toList();
         } catch (Exception e) {
             log.error("Falha ao buscar a lista de modelos.", e);
             throw new InternalServerErrorException(e.getMessage());

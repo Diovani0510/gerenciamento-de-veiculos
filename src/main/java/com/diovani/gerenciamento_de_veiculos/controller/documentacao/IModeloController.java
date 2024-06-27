@@ -1,6 +1,7 @@
 package com.diovani.gerenciamento_de_veiculos.controller.documentacao;
 
 
+import com.diovani.gerenciamento_de_veiculos.dto.ResumoDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.modelo.PostModeloDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.modelo.PutModeloDTO;
 import com.diovani.gerenciamento_de_veiculos.model.Modelo;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Tag(name = "Controller de Modelos", description = "Gerenciamento de Modelos")
 public interface IModeloController {
@@ -32,6 +35,11 @@ public interface IModeloController {
     ResponseEntity<Page<Modelo>> listarPorMarca(@PathVariable Long marcaId,
                                         @RequestParam(defaultValue = "0") final Integer numeroPagina,
                                         @RequestParam(defaultValue = "5") final Integer quantidadeItens);
+
+
+    @Operation(summary = "Buscar lista resumida de Modelos", description = "Busca uma lista resumida de Modelos por Marca.")
+    ResponseEntity<List<ResumoDTO>>  listarResumo(@PathVariable Long marcaId);
+
 
     @Operation(summary = "Deletar Modelo", description = "Deleta um Modelo por seu Id.")
     ResponseEntity<Long> deletarPorId(@PathVariable Long id);

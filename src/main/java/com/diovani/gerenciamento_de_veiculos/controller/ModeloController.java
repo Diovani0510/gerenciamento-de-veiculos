@@ -1,6 +1,7 @@
 package com.diovani.gerenciamento_de_veiculos.controller;
 
 import com.diovani.gerenciamento_de_veiculos.controller.documentacao.IModeloController;
+import com.diovani.gerenciamento_de_veiculos.dto.ResumoDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.modelo.PostModeloDTO;
 import com.diovani.gerenciamento_de_veiculos.dto.modelo.PutModeloDTO;
 import com.diovani.gerenciamento_de_veiculos.model.Modelo;
@@ -10,6 +11,8 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/modelos")
@@ -49,6 +52,11 @@ public class ModeloController implements IModeloController {
                                                 @RequestParam(defaultValue = "0") final Integer numeroPagina,
                                                 @RequestParam(defaultValue = "5") final Integer quantidadeItens) {
         return ResponseEntity.ok(this.service.listarPorMarcaId(marcaId, numeroPagina, quantidadeItens));
+    }
+
+    @GetMapping("/listar/resumo/marca/{marcaId}")
+    public  ResponseEntity<List<ResumoDTO>> listarResumo(@PathVariable Long marcaId) {
+        return ResponseEntity.ok(this.service.listarResumoPorMarcaId(marcaId));
     }
 
     @DeleteMapping("/{id}")
