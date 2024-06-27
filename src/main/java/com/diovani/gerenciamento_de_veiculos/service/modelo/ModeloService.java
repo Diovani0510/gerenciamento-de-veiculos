@@ -1,7 +1,7 @@
 package com.diovani.gerenciamento_de_veiculos.service.modelo;
 
 import com.diovani.gerenciamento_de_veiculos.dto.modelo.PutModeloDTO;
-import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNãoEncontradaException;
+import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNaoEncontradaException;
 import com.diovani.gerenciamento_de_veiculos.exception.InternalServerErrorException;
 import com.diovani.gerenciamento_de_veiculos.model.Modelo;
 import com.diovani.gerenciamento_de_veiculos.repository.ModeloRepository;
@@ -30,7 +30,7 @@ public class ModeloService {
 
     public Modelo buscarPorId(Long id) {
         return this.repository.findById(id)
-                .orElseThrow(() -> new EntidadeNãoEncontradaException("Modelo não encontrado."));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Modelo não encontrado."));
     }
 
     public Modelo editar(Long id, PutModeloDTO dto) {

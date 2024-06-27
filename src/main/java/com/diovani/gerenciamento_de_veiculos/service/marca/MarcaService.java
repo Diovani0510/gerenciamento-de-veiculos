@@ -1,7 +1,7 @@
 package com.diovani.gerenciamento_de_veiculos.service.marca;
 
 import com.diovani.gerenciamento_de_veiculos.dto.marca.PutMarcaDTO;
-import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNãoEncontradaException;
+import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNaoEncontradaException;
 import com.diovani.gerenciamento_de_veiculos.exception.InternalServerErrorException;
 import com.diovani.gerenciamento_de_veiculos.model.Marca;
 import com.diovani.gerenciamento_de_veiculos.repository.MarcaRepository;
@@ -30,7 +30,7 @@ public class MarcaService {
 
     public Marca buscarPorId(Long id) {
         return this.repository.findById(id)
-                .orElseThrow(() -> new EntidadeNãoEncontradaException("Marca não encontrada."));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Marca não encontrada."));
     }
 
     public Marca editar(Long id, PutMarcaDTO dto) {

@@ -1,6 +1,6 @@
 package com.diovani.gerenciamento_de_veiculos.handler;
 
-import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNãoEncontradaException;
+import com.diovani.gerenciamento_de_veiculos.exception.EntidadeNaoEncontradaException;
 import com.diovani.gerenciamento_de_veiculos.exception.InternalServerErrorException;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CarrosExceptionHandler {
 
-    @ExceptionHandler(EntidadeNãoEncontradaException.class)
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
     public ResponseEntity<ErrorResponse> handleEntityNotFoundError(Exception e) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         ErrorResponse errorResponse = new ErrorResponse(status.value(), e.getMessage());
